@@ -1,8 +1,5 @@
 The goal of this document is as an outline, a proposal, and an opportunity to gather requirements and discuss integration options with the Argo CD contributors and community.
 
-Requirements:
-- ApplicationSet code will live in the same Git repo as Argo CD
-
 ## Integrating ApplicationSet controller with Argo CD
 
 ### 1) Code quality: quality of life improvements
