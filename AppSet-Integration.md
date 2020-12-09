@@ -16,7 +16,7 @@ Requirements:
     - If running within same OS process/statefulset, need to add support for application controller's horizontal scaling
     - My take: I could argue it either way, but suggest keeping them separate for now, and reconsider after integration is complete (will need a new `Deployment` for AppSet controller in the mean time)    
 - I'm not aware of any outstanding bugs that are severe enough to block integration (but that's what testing is for, below)
-- *Open question*: how much of the remaining proposal items do we want to handle before we merge?
+- *Open question*: how many of the remaining proposal items do we want to handle before we merge?
     - Currently implemented generators: cluster, list, git directory
     - In progress: git files discovery (https://github.com/argoproj-labs/applicationset/pull/45), but it currently uses Argo CD's Git client util directly (which calls `git` CLI), rather than interacting with git via repo-server
     - My take: It sounds like some folks are already using ApplicationSet controller in their own environments, which is a testament to the functionality that is already in place. I don't think any of the outstanding functionality needs to block integration.
