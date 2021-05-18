@@ -130,7 +130,7 @@ The List generator is a very basic generator: it takes a literal list of URL and
 In this example, the List generator passes 3 sets of URL/cluster pairs, one such pair is `{cluster: 'engineering-dev', url: 'https://1.2.3.4}'` ). Each set of URL/cluster pairs is rendered into the template, which results in three corresponding Argo CD Applications (one for each defined cluster).
 
 After the ApplicationSet is applied to the cluster, here is how the generated Applications look within the Argo CD Web UI:
-![](https://i.imgur.com/w2cWpji.png)
+![](assets/Argo-CD-Web-UI.png)
 
 While basic, the List generator can still be effective, as adding or removing new values from this list will immediately have a corresponding effect on all targetted clusters: new clusters added to the `list` will automatically have templated Applications deployed to them, and clusters removed from the list will likewise have the Application resources removed.
 
@@ -215,7 +215,7 @@ The Git file generator is great for providing more fine-grained control over the
 
 The ApplicationSet feature is bundled with the OpenShift GitOps operator, but must be enabled via the `ArgoCD` operand. To ensure that the ApplicationSet feature is enabled, add the `applicationSet: {}` YAML field to the ArgoCD operand, like below on line 10:
 
-![](https://i.imgur.com/0YQrvCQ.png)
+![](assets/Argo-CD-Web-UI.png)
 
 You may also make this change from the CLI, using:
 
@@ -225,7 +225,7 @@ To verify that the ApplicationSet feature is enabled within the ArgoCD instance,
 
 Under the YAML tab, ensure that `applicationSet: {}` is included in the operand YAML, as seen below, on line 120:
 
-![](https://i.imgur.com/XQKCYM6.png)
+![](assets/Edit-Argo-CD.png)
 
 To disable the ApplicationSet feature, simply remove the `applicationSet: {}` field within the YAML (i.e. reverse the installation steps).
 
