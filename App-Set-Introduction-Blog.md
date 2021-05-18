@@ -123,7 +123,7 @@ Take a look at the `list` field under `.spec.generators`. The `list` field indic
       elements: 
       - cluster: engineering-dev
         url: https://1.2.3.4
-	  - (...)
+      # (...)
 ```
 The List generator is a very basic generator: it takes a literal list of URL and cluster values, and passes them directly as parameters to the template. The `cluster` field refers to the cluster name (as [defined within Argo CD settings](https://argoproj.github.io/argo-cd/getting_started/#5-register-a-cluster-to-deploy-apps-to-optional)), and `url` is the Kubernetes API server URL (this should also be defined within Argo CD settings).
 
