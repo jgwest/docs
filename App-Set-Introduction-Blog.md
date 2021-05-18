@@ -231,7 +231,7 @@ To disable the ApplicationSet feature, simply remove the `applicationSet: {}` fi
 
 ## Resources
 
-We hope you've enjoyed this quick introduction to the power and flexibility through automation and templating, that is available with ApplicationSets! Learn more about ApplicationSets, GitOps, OpenShift, and more, from the resources below.
+We hope you've enjoyed this quick introduction to the power and flexibility that is available with ApplicationSets, for managing Argo CD applications using  automation and templating. Learn more about ApplicationSets, GitOps, OpenShift, and more, check out the resources below.
 
 #### Further resources:
 - [ApplicationSet Documentation](https://argocd-applicationset.readthedocs.io/): Detailed documention on ApplicationSet generators, templates, use cases, and more.
