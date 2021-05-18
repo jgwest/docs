@@ -1,9 +1,9 @@
-Introduction to ApplicationSets in OpenShift GitOps
-===
+## Introduction to ApplicationSets in OpenShift GitOps
+### Authors: Jonathan West, Dewan Ahmed
 
 When it comes to coding, where do you store your application source files? Do you have a pet server with multiple directories to track various versions? I certainly hope you don't, and instead use some sort of Git repository for version control. So if Git works great for tracking your application source files, why would you treat your cluster infrastructure or configuration files any different?
 
-With Git repositories as a single source of truth to provision and maintain infrastructure as code, GitOps provides the following values: 
+With Git repositories as a single source of truth to provision and maintain infrastructure as code, GitOps enables the following values: 
 
 - Consistency across any cluster, any cloud, and any on-prem environment
 - Increased agility and improved reliability with visibility and version control through Git
@@ -27,12 +27,12 @@ ApplicationSets offers a number of improvements via automation:
  
 Best of all, applications managed by the ApplicationSet controller can be managed by only *a single instance* of an ApplicationSet custom resource (CR), which means no more juggling of large numbers of Argo CD Application objects when targeting multiple clusters/repositories! 
 
-Changes you make to this one ApplicationSet CR -- such as additions, edits, or deletions --  will automatically be deployed to all Argo CD Applications managed by that CR.
+Changes you make to this one ApplicationSet CR -- such as additions, edits, or deletions --  will automatically be deployed to all Argo CD Applications handled by that CR (and in tandem, all the OpenShift/Kubernetes resources handled by those Applications).
 
 
 ## The Argo CD Application resource
 
-First, let's take a look at Argo CD's existing capabilities, and then we'll focus on how they can be improved by using ApplicationSets.
+First, let's take a look at Argo CD's existing capabilities, and then we'll focus on how they can be augmented by using ApplicationSets.
 
 A simple [Argo CD Application resource](https://argoproj.github.io/argo-cd/operator-manual/declarative-setup/#applications) looks like this:
 ```yaml
@@ -110,7 +110,7 @@ spec:
 
 First, take a look at the `.spec.template` field. You may notice that this looks a lot like an Argo CD Application, as seen in the previous section, and that's because *it* is an Argo CD Application!
 
-Or more accurately, it is an Application *template*, with the exact same set of fields as the standalone Argo CD Application resource, however, the ApplicationSet template differs due to its support for the use of `{{param}}`-style template parameters. These `{{param}}` parameters may be be used to insert custom values into the template section of the resource.
+Or more accurately, it is an Application *template*, with the exact same set of fields as the standalone Argo CD Application resource, however, the ApplicationSet template differs due to its support for the use of `{{param}}`-style template parameters. These `{{param}}` parameters may be used to insert custom values into the template section of the resource.
 
 Once custom parameters are inserted into the template, the template is rendered into a standalone Argo CD `Application` CR, which is applied as a Kubernetes resource to the Argo CD namespace of the cluster. In short, the template fields start as incomplete fields, then its parameters are filled in with values, and finally it is rendered and applied to the cluster.
 
@@ -215,7 +215,7 @@ The Git file generator is great for providing more fine-grained control over the
 
 The ApplicationSet feature is bundled with the OpenShift GitOps operator, but must be enabled via the `ArgoCD` operand. To ensure that the ApplicationSet feature is enabled, add the `applicationSet: {}` YAML field to the ArgoCD operand, like below on line 10:
 
-![](assets/Argo-CD-Web-UI.png)
+![](assets/Create-ArgoCD.png)
 
 You may also make this change from the CLI, using:
 
@@ -231,7 +231,7 @@ To disable the ApplicationSet feature, simply remove the `applicationSet: {}` fi
 
 ## Resources
 
-We hope you've enjoyed this quick introduction to the power and flexibility that is available with ApplicationSets, for managing Argo CD applications using  automation and templating. Learn more about ApplicationSets, GitOps, OpenShift, and more, check out the resources below.
+We hope you've enjoyed this quick introduction to the power and flexibility that is available with ApplicationSets, for managing Argo CD applications using  automation and templating. To learn more about ApplicationSets, GitOps, OpenShift, and more, check out the resources below.
 
 #### Further resources:
 - [ApplicationSet Documentation](https://argocd-applicationset.readthedocs.io/): Detailed documention on ApplicationSet generators, templates, use cases, and more.
