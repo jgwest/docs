@@ -1,5 +1,16 @@
-## Introduction to ApplicationSets in OpenShift GitOps
-### Authors: Jonathan West, Dewan Ahmed
+---
+title: "Introduction to ApplicationSets in OpenShift GitOps"
+date: 2021-05-19T00:00:00-04:00
+draft: true
+authors: Jonathan West & Dewan Ahmed 
+categories:
+  - Blog
+tags:
+  - openshift
+  - argocd
+  - applicationset
+  - gitops
+---
 
 When it comes to coding, where do you store your application source files? Do you have a pet server with multiple directories to track various versions? I certainly hope you don't, and instead use some sort of Git repository for version control. So if Git works great for tracking your application source files, why would you treat your cluster infrastructure or configuration files any different?
 
@@ -10,6 +21,8 @@ With Git repositories as a single source of truth to provision and maintain infr
 - Increased security by adapting security best practices not only for application development but also for application delivery  
 
 One of the most popular GitOps tools is [Argo CD](https://github.com/argoproj/argo-cd/), a CNCF project with an active community for continuous delivery through GitOps. This open-source declarative continuous delivery tool is being used in production by many large companies such as IBM, Intuit, and Major League Baseball. 
+
+![OpenShift GitOps](assets/openshift-gitops-banner.png)
 
 [OpenShift GitOps](http://openshift.com/gitops) is an OpenShift add-on which bundles Argo CD, and other tools, to enable teams to implement GitOps workflows for cluster configuration and application delivery. OpenShift GitOps is available as an operator in OpenShift OperatorHub, and can be installed with a simple one-click step. Once installed, users can deploy Argo CD instances via Kubernetes custom resources.
 
@@ -22,7 +35,7 @@ OpenShift GitOps' ApplicationSet functionality is based on the open source [Argo
 
 ApplicationSets offers a number of improvements via automation:
 - Automatically deploy to multiple cluster at once, and automatically adapt to the addition/removal of clusters.
-- Handle large deployments of Argo CD Applications from a single mono-repository, automatically responding to the additional/removal of new applications to the repository
+- Handle large deployments of Argo CD Applications from a single mono-repository, automatically responding to the addition/removal of new applications to the repository
 - Enables development teams to manage large groups of applications securely, via self-service, without cluster administrator review, on a cluster managed via Argo CD.
  
 Best of all, applications managed by the ApplicationSet controller can be managed by only *a single instance* of an ApplicationSet custom resource (CR), which means no more juggling of large numbers of Argo CD Application objects when targeting multiple clusters/repositories! 
@@ -57,7 +70,7 @@ spec:
 
 The `source` field designates the Git Repository that Argo CD is continously deploying OpenShift cluster resources *from*, and the `destination` field is the cluster/namespace that it is deploying those resources *to*.
 
-But, if you examine the Argo CD Application above, you'll notice that you can only deploy from *one* Git repository to *one* cluster/namespace, using a single Application instance: Applications resources are 1-1 mappings between Git repositories and cluster namespaces. This means that if you wanted to deploy 10 applications to 100 clusters, it would require managing 1,000 individual Application resources (*# of clusters * # of applications*)! 
+But, if you examine the Argo CD Application above, you'll notice that you can only deploy from *one* Git repository to *one* cluster/namespace, using a single Application instance. Applications resources are 1-1 mappings between Git repositories and cluster namespaces. This means that if you wanted to deploy 10 applications to 100 clusters, it would require managing 1,000 individual Application resources (*# of clusters * # of applications*)! 
 
 Rather than needing to keep 1,000+ individual Argo CD resources synchronized, wouldn't it be better if you could manage all of those Applications and clusters from a single resource? Fortunately, with the ApplicationSet custom resource you can!
 
@@ -108,7 +121,7 @@ spec:
         namespace: guestbook
 ```
 
-First, take a look at the `.spec.template` field. You may notice that this looks a lot like an Argo CD Application, as seen in the previous section, and that's because *it* is an Argo CD Application!
+First, take a look at the `.spec.template` field. You may notice that this looks a lot like an Argo CD Application, as seen in the previous section, and that's because *it is* an Argo CD Application!
 
 Or more accurately, it is an Application *template*, with the exact same set of fields as the standalone Argo CD Application resource, however, the ApplicationSet template differs due to its support for the use of `{{param}}`-style template parameters. These `{{param}}` parameters may be used to insert custom values into the template section of the resource.
 
