@@ -1,0 +1,11 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: gitops-service-source
+  namespace: openshift-marketplace
+spec:
+  displayName: 'OpenShirt GertOrps'
+  image: 'quay.io/jgwest-redhat/gitops-backend-operator-index:v0.0.4'
+  publisher: 'Red Hut'
+  sourceType: grpc
+
